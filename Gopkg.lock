@@ -6,8 +6,11 @@
   name = "github.com/bitrise-io/go-utils"
   packages = [
     "colorstring",
+    "command",
+    "errorutil",
     "log",
     "parseutil",
+    "pathutil",
     "pointers"
   ]
   revision = "b33f6bcef9b50045d7e62364b354584afc3ee329"
@@ -21,6 +24,6 @@
 [solve-meta]
   analyzer-name = "dep"
   analyzer-version = 1
-  inputs-digest = "dee1f6b2f01e3a4378a7501e8cfdba0c22e070eade25621d24f72bb00f3df4e9"
+  inputs-digest = "2ebd7b51220e798b7342a7988a7b70eb3639d8b974264696ef85a3670c9c4f54"
   solver-name = "gps-cdcl"
   solver-version = 1

@@ -6,6 +6,7 @@ import (
 	"os/exec"
 	"strings"
 
+	"github.com/bitrise-io/go-utils/command"
 	"github.com/bitrise-io/go-utils/log"
 	"github.com/bitrise-tools/go-steputils/stepconf"
 )
@@ -17,27 +18,9 @@ type config struct {
 	WorkDir  string `env:"workdir,dir"`
 }
 
-func runCommand(name string, arg ...string) error {
-	log.Infof("$ %s %s", name, strings.Join(arg, " "))
-	cmd := exec.Command(name, arg...)
-	cmd.Stdout = os.Stdout
-	cmd.Stderr = os.Stderr
-	return cmd.Run()
-}
-
 func failf(format string, v ...interface{}) {
 	log.Errorf(format, v...)
 	os.Exit(1)
-}
-
-func update(version string) error {
-	args := []string{"install", "-g"}
-	if version == "latest" {
-		args = append(args, "cordova")
-	} else {
-		args = append(args, "cordova@"+version)
-	}
-	return runCommand("npm", args...)
 }
 
 func main() {
@@ -48,7 +31,11 @@ func main() {
 	stepconf.Print(cfg)
 
 	if cfg.Version != "" {
-		if err := update(cfg.Version); err != nil {
+		args := []string{"install", "-g", "cordova",
+			map[bool]string{true: "@" + cfg.Version}[cfg.Version != "latest"]}
+		cmd := command.NewWithStandardOuts("npm", args...)
+		log.Infof(cmd.PrintableCommandArgs())
+		if err := cmd.Run(); err != nil {
 			failf("Failed to update cordova: %v", err)
 		}
 	}
@@ -57,19 +44,21 @@ func main() {
 	if err != nil {
 		failf("Failed to get cordova version: %v", err)
 	}
-	fmt.Printf("using cordova version %s\n", out)
-
-	if err := os.Chdir(cfg.WorkDir); err != nil {
-		failf("Failed to change to directory (%s), error: %s", cfg.WorkDir, err)
-	}
+	fmt.Printf("\nusing cordova version %s\n", out)
 
 	platforms := strings.Split(cfg.Platform, ",")
 	if cfg.Readd {
-		if err := runCommand("cordova", append([]string{"platform", "rm"}, platforms...)...); err != nil {
+		args := append([]string{"platform", "rm"}, platforms...)
+		cmd := command.NewWithStandardOuts("cordova", args...).SetDir(cfg.WorkDir)
+		log.Infof(cmd.PrintableCommandArgs())
+		if err := cmd.Run(); err != nil {
 			failf("Failed to remove platform, error: %s", err)
 		}
 	}
-	if err := runCommand("cordova", append([]string{"platform", "add"}, platforms...)...); err != nil {
+	args := append([]string{"platform", "add"}, platforms...)
+	cmd := command.NewWithStandardOuts("cordova", args...).SetDir(cfg.WorkDir)
+	log.Infof(cmd.PrintableCommandArgs())
+	if err := cmd.Run(); err != nil {
 		failf("Failed to add platform, error: %s", err)
 	}
 }
