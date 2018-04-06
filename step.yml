@@ -8,19 +8,19 @@ description: |-
   - `cordova "platform" "rm" "<platform>"`
   - `cordova "platform" "add" "<platform>"`
 
-website: https://github.com/bitrise-steplib/steps-cordova-prepare
-source_code_url: https://github.com/bitrise-steplib/steps-cordova-prepare
-support_url: https://github.com/bitrise-steplib/steps-cordova-prepare/issues
+website: https://github.com/bitrise-community/steps-cordova-prepare
+source_code_url: https://github.com/bitrise-community/steps-cordova-prepare
+support_url: https://github.com/bitrise-community/steps-cordova-prepare/issues
 project_type_tags:
 - cordova
 type_tags:
-- build
+- utility
 deps:
   brew:
   - name: go
 toolkit:
   go:
-    package_name: github.com/bitrise-steplib/steps-cordova-prepare
+    package_name: github.com/bitrise-community/steps-cordova-prepare
 inputs:
   - platform: "ios,android"
     opts:
