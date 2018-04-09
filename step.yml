@@ -3,7 +3,7 @@ summary: Prepares your Cordova project
 description: |-
   Prepares your Cordova project.
 
-  The step prepare your Cordova project by calling:
+  The step prepares your Cordova project by calling:
 
   - `cordova "platform" "rm" "<platform>"`
   - `cordova "platform" "add" "<platform>"`
