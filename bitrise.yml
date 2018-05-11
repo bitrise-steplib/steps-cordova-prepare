@@ -26,6 +26,8 @@ workflows:
         - content: git clone "${SAMPLE_APP_URL}" .
     - path::./:
         title: Step Test
+        inputs:
+        - cordova_version: "8"
 
   go-tests:
     before_run:
