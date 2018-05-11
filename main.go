@@ -31,8 +31,11 @@ func main() {
 	stepconf.Print(cfg)
 
 	if cfg.Version != "" {
-		args := []string{"install", "-g", "cordova",
-			map[bool]string{true: "@" + cfg.Version}[cfg.Version != "latest"]}
+		p := "cordova"
+		if cfg.Version != "latest" {
+			p += "@" + cfg.Version
+		}
+		args := []string{"install", "-g", p}
 		cmd := command.NewWithStandardOuts("npm", args...)
 		log.Infof(cmd.PrintableCommandArgs())
 		if err := cmd.Run(); err != nil {
