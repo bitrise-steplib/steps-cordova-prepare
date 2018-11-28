@@ -6,6 +6,14 @@
   name = "github.com/bitrise-tools/go-steputils"
   branch = "master"
 
+[[constraint]]
+  name = "github.com/bitrise-community/steps-cordova-archive"
+  branch = "feature/remove-platform-add"
+
+[[constraint]]
+  name = "github.com/bitrise-community/steps-ionic-archive"
+  branch = "feature/remove-platform-add"
+
 [prune]
   go-tests = true
   unused-packages = true
