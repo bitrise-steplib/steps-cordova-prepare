@@ -5,8 +5,7 @@ description: |-
 
   The step prepares your Cordova project by calling:
 
-  - `cordova "platform" "rm" "<platform>"`
-  - `cordova "platform" "add" "<platform>"`
+  - `cordova "prepare" "<platform>"`
 
 website: https://github.com/bitrise-community/steps-cordova-prepare
 source_code_url: https://github.com/bitrise-community/steps-cordova-prepare

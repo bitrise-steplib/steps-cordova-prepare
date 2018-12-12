@@ -2,20 +2,20 @@
 
 
 [[projects]]
-  branch = "feature/remove-platform-add"
+  branch = "master"
   digest = "1:34f29823dab18aa297240a3ac46711482bb603e447bf1e395c4e8d5338301853"
   name = "github.com/bitrise-community/steps-cordova-archive"
   packages = ["cordova"]
   pruneopts = "UT"
-  revision = "a88b507ad0bb0665d3ab4c1fda4508aea27c3b97"
+  revision = "3095639b003c278870bdba1c67dd8c1f1bdb76c3"
 
 [[projects]]
-  branch = "feature/remove-platform-add"
+  branch = "master"
   digest = "1:36004791ce19a24a42bac3052e62592ae99e1b953340d5f4c6e8e1ca5202bfe9"
   name = "github.com/bitrise-community/steps-ionic-archive"
   packages = ["jsdependency"]
   pruneopts = "UT"
-  revision = "41a5027f1046c555df0912c84dcf16276448abc8"
+  revision = "7869644a568b04e31b29def8df7233b3a9466ea8"
 
 [[projects]]
   branch = "master"
