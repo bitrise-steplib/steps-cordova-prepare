@@ -5,8 +5,7 @@ description: |-
 
   The step prepares your Cordova project by calling:
 
-  - `cordova "platform" "rm" "<platform>"`
-  - `cordova "platform" "add" "<platform>"`
+  - `cordova "prepare" "<platform>"`
 
 website: https://github.com/bitrise-community/steps-cordova-prepare
 source_code_url: https://github.com/bitrise-community/steps-cordova-prepare
@@ -34,17 +33,6 @@ inputs:
       - "ios,android"
       - "ios"
       - "android"
-      is_required: true
-  - readd_platform: "true"
-    opts:
-      title: "Should remove platforms as preparing the project?"
-      description: |-
-        Specify whether to remove platforms and then to re-add them (overwrites some config.xml values).
-
-        `cordova platform rm <platform>`
-      value_options:
-      - "true"
-      - "false"
       is_required: true
   - cordova_version: 
     opts:
