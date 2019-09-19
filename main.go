@@ -18,6 +18,7 @@ type config struct {
 	Platform string `env:"platform,opt[ios,android,'ios,android']"`
 	Version  string `env:"cordova_version"`
 	WorkDir  string `env:"workdir,dir"`
+	UseCache bool   `env:"cache_local_deps,opt[true,false]"`
 }
 
 func failf(format string, v ...interface{}) {
@@ -130,5 +131,11 @@ func main() {
 
 	if err := platformPrepareCmd.Run(); err != nil {
 		failf("cordova prepare failed, error: %s", err)
+	}
+
+	if cfg.UseCache {
+		if err := cacheNpm(workDir); err != nil {
+			log.Warnf("Failed to mark files for caching, error: %s", err)
+		}
 	}
 }
