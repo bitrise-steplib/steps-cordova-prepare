@@ -14,7 +14,7 @@ description: |-
 
   ### Troubleshooting
   
- Make sure your platforms are added to your `config.xml` & `package.json` before running `cordova prepare` as that is a prerequisite of running this command.
+  Make sure your platforms are added to your `config.xml` & `package.json` before running `cordova prepare` as that is a prerequisite of running this command.
   
   ### Useful links
   
@@ -32,9 +32,7 @@ project_type_tags:
 - cordova
 type_tags:
 - utility
-deps:
-  brew:
-  - name: go
+
 toolkit:
   go:
     package_name: github.com/bitrise-community/steps-cordova-prepare
