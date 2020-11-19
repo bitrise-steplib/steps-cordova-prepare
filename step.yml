@@ -14,7 +14,7 @@ description: |-
 
   ### Troubleshooting
   
- Make sure your platforms are added to your `config.xml` & `package.json` before running `cordova prepare`.
+ Make sure your platforms are added to your `config.xml` & `package.json` before running `cordova prepare` as that is a preqrequisite of running this command.
   
   ### Useful links
   
