@@ -1,11 +1,29 @@
-title: Cordova prepare
-summary: Prepares your Cordova project
+title: Cordova Prepare
+summary: Runs Cordova Prepare for your project
 description: |-
-  Prepares your Cordova project.
+  Prepares your Cordova project. 
+  
+The Step prepares your Cordova project by calling cordova prepare and copying files into platform(s), making the project ready to be built.
 
-  The step prepares your Cordova project by calling:
+  ### Configuring the Step
+  
+  1. Make sure the selected platform (iOS, Android, or both) matches your project in the **Platform to use in cordova-cli commands** step input.
+  2. The **Cordova version** input can be used to install a specific version of Cordova. By default the pre-installed version will be used which can differ from stack to stack. Check the current stack images [here.](https://github.com/bitrise-io/bitrise.io/tree/master/system_reports)
+  3. For the **Working directory** input, make sure you have your `config.xml` file at the root of your repository, or in case it's located elsewhere, make sure this input points to that directory.
+  4. Caching can be enabled for `node_modules` provided you have [Cache Pull](https://www.bitrise.io/integrations/steps/cache-pull) and [Cache Push](https://www.bitrise.io/integrations/steps/cache-push) set up.  
 
-  - `cordova "prepare" "<platform>"`
+  ### Troubleshooting
+  
+ Make sure your platforms are added to your `config.xml` & `package.json` before running `cordova prepare`.
+  
+  ### Useful links
+  
+  - [Cordova CLI Reference](https://cordova.apache.org/docs/en/latest/reference/cordova-cli/)
+  - 
+  ### Related Steps
+  
+  - [Cordova Archive](https://www.bitrise.io/integrations/steps/cordova-android)
+  - [Generate Cordova build configuration](https://www.bitrise.io/integrations/steps/generate-cordova-build-configuration)
 
 website: https://github.com/bitrise-community/steps-cordova-prepare
 source_code_url: https://github.com/bitrise-community/steps-cordova-prepare
