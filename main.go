@@ -5,13 +5,13 @@ import (
 	"os"
 	"strings"
 
-	"github.com/bitrise-community/steps-cordova-archive/cordova"
-	"github.com/bitrise-community/steps-ionic-archive/jsdependency"
+	"github.com/bitrise-io/go-steputils/jsdependency"
+	"github.com/bitrise-io/go-steputils/stepconf"
 	"github.com/bitrise-io/go-utils/colorstring"
 	"github.com/bitrise-io/go-utils/errorutil"
 	"github.com/bitrise-io/go-utils/log"
 	"github.com/bitrise-io/go-utils/pathutil"
-	"github.com/bitrise-tools/go-steputils/stepconf"
+	"github.com/bitrise-steplib/steps-cordova-archive/cordova"
 )
 
 type config struct {
@@ -31,7 +31,8 @@ func installDependency(packageManager jsdependency.Tool, name string, version st
 	if err != nil {
 		return fmt.Errorf("Failed to update %s version, error: %s", name, err)
 	}
-	for i, cmd := range cmdSlice {
+	for i, cmdWrapper := range cmdSlice {
+		cmd := cmdWrapper.Slice
 		fmt.Println()
 		log.Donef("$ %s", cmd.PrintableCommandArgs())
 		fmt.Println()
