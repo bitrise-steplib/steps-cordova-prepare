@@ -5,12 +5,14 @@ import (
 	"os"
 	"strings"
 
-	"github.com/bitrise-io/go-steputils/jsdependency"
 	"github.com/bitrise-io/go-steputils/stepconf"
+	"github.com/bitrise-io/go-steputils/v2/jsdependency"
 	"github.com/bitrise-io/go-utils/colorstring"
 	"github.com/bitrise-io/go-utils/errorutil"
 	"github.com/bitrise-io/go-utils/log"
 	"github.com/bitrise-io/go-utils/pathutil"
+	"github.com/bitrise-io/go-utils/v2/command"
+	"github.com/bitrise-io/go-utils/v2/env"
 	"github.com/bitrise-steplib/steps-cordova-archive/cordova"
 )
 
@@ -26,13 +28,13 @@ func failf(format string, v ...interface{}) {
 	os.Exit(1)
 }
 
-func installDependency(packageManager jsdependency.Tool, name string, version string) error {
-	cmdSlice, err := jsdependency.InstallGlobalDependencyCommand(packageManager, name, version)
+func installDependency(manager jsdependency.Manager, packageManager jsdependency.Tool, name string, version string) error {
+	cmdSlice, err := manager.InstallGlobalDependencyCommand(name, version)
 	if err != nil {
 		return fmt.Errorf("Failed to update %s version, error: %s", name, err)
 	}
 	for i, cmdWrapper := range cmdSlice {
-		cmd := cmdWrapper.Slice
+		cmd := cmdWrapper.Command
 		fmt.Println()
 		log.Donef("$ %s", cmd.PrintableCommandArgs())
 		fmt.Println()
@@ -97,7 +99,10 @@ func main() {
 		}
 		log.Printf("Js package manager used: %s", packageManager)
 
-		if err := installDependency(packageManager, "cordova", cfg.Version); err != nil {
+		cmdFactory := command.NewFactory(env.NewRepository())
+		manager := jsdependency.NewManager(cmdFactory, packageManager)
+
+		if err := installDependency(manager, packageManager, "cordova", cfg.Version); err != nil {
 			failf("Updating cordova failed, error: %s", err)
 		}
 	}
